@@ -1,4 +1,14 @@
 return {
+  -- NOTE: Theme
+  {
+    'ellisonleao/gruvbox.nvim',
+
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme 'gruvbox'
+    end,
+  },
+
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
@@ -44,7 +54,7 @@ return {
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'gruvbox',
         component_separators = '|',
         section_separators = '',
       },
@@ -120,16 +130,4 @@ return {
       require('neo-tree').setup {}
     end,
   },
-
-  -- NOTE: Finally, themes
-  -- FIX: figure out how to switch between themes more easily
-
-  { -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
-  },
-
 }
