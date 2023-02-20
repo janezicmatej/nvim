@@ -5,6 +5,7 @@ return {
 
     priority = 1000,
     config = function()
+      require('gruvbox').setup({ contrast = 'soft'})
       vim.cmd.colorscheme 'gruvbox'
     end,
   },
@@ -55,6 +56,7 @@ return {
       options = {
         icons_enabled = false,
         theme = 'gruvbox',
+        statusline_style = 'mix',
         component_separators = '|',
         section_separators = '',
       },
@@ -123,7 +125,7 @@ return {
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
     },
-    config = function ()
+    config = function()
       -- Unless you are still migrating, remove the deprecated commands from v1.x
       vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
