@@ -42,6 +42,6 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- set custom end of line character
-vim.cmd [[set list listchars=eol:﬋]]
+-- vim.cmd [[set list listchars=eol:\n]]
 
 return {}

@@ -5,7 +5,7 @@ return {
 
     priority = 1000,
     config = function()
-      require('gruvbox').setup({ contrast = 'soft'})
+      require('gruvbox').setup({ contrast = 'soft', italic = false })
       vim.cmd.colorscheme 'gruvbox'
     end,
   },
