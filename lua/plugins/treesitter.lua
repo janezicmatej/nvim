@@ -24,10 +24,10 @@ return {
       incremental_selection = {
         enable = true,
         keymaps = {
-          init_selection = '<c-space>',
-          node_incremental = '<c-space>',
-          scope_incremental = '<c-space>',
-          node_decremental = '<M-space>',
+          init_selection = '<C-Space>',
+          node_incremental = '<C-Space>',
+          scope_incremental = '<C-Space>',
+          node_decremental = '<C-Bslash>',
         },
       },
       -- refactor
