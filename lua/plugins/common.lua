@@ -1,12 +1,15 @@
 return {
   -- NOTE: Theme
   {
-    'ellisonleao/gruvbox.nvim',
+    'sainnhe/gruvbox-material',
 
     priority = 1000,
     config = function()
-      require('gruvbox').setup({ contrast = 'soft', italic = false })
-      vim.cmd.colorscheme 'gruvbox'
+      vim.g.gruvbox_material_background = 'soft'
+      vim.g.gruvbox_material_foreground = 'original'
+      vim.g.gruvbox_material_better_performance = 1
+
+      vim.cmd.colorscheme 'gruvbox-material'
     end,
   },
 
@@ -19,7 +22,7 @@ return {
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- NOTE: Second, plugins that require setup call
+  -- NOTE: Second, plugins that require setup call (done via opts)
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',        opts = {} },
@@ -32,6 +35,9 @@ return {
 
   -- highlighting for comments
   { "folke/todo-comments.nvim",    dependencies = "nvim-lua/plenary.nvim", opts = {} },
+
+  -- markdown preview using glow
+  { "ellisonleao/glow.nvim",       config = true,                          cmd = "Glow" },
 
   -- NOTE: Third, plugins that require some setup, but not enugh for separate file
 
@@ -55,7 +61,7 @@ return {
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'gruvbox',
+        theme = 'gruvbox-material',
         statusline_style = 'mix',
         component_separators = '|',
         section_separators = '',
