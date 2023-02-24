@@ -69,6 +69,9 @@ return {
         -- gopls = {},
         marksman = {},
         pyright = {},
+        tsserver = {},
+        solc = {},
+
         rust_analyzer = {
           checkOnSave = {
             allFeatures = true,
@@ -78,8 +81,6 @@ return {
             }
           }
         },
-        tsserver = {},
-
         lua_ls = {
           Lua = {
             workspace = { checkThirdParty = false },
