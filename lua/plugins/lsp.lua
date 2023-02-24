@@ -63,24 +63,14 @@ return {
       'folke/neodev.nvim',
     },
 
-    config = function ()
+    config = function()
       local servers = {
         -- clangd = {},
         -- gopls = {},
         marksman = {},
         pyright = {},
         tsserver = {},
-        solc = {},
-
-        rust_analyzer = {
-          checkOnSave = {
-            allFeatures = true,
-            overrideCommand = {
-              'cargo', 'clippy', '--workspace', '--message-format=json',
-              '--all-targets', '--all-features'
-            }
-          }
-        },
+        rust_analyzer = {},
         lua_ls = {
           Lua = {
             workspace = { checkThirdParty = false },
@@ -123,7 +113,7 @@ return {
 
     dependencies = { 'nvim-lua/plenary.nvim' },
 
-    config = function ()
+    config = function()
       local null_ls = require("null-ls")
 
       null_ls.setup({
