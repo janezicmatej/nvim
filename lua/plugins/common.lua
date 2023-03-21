@@ -39,6 +39,18 @@ return {
   -- markdown preview using glow
   { "ellisonleao/glow.nvim",       config = true,                          cmd = "Glow" },
 
+  -- permanent links to fileranges
+  { 'ruifm/gitlinker.nvim',
+    config = function()
+      require('gitlinker').setup(
+        {
+          callbacks = {
+            ['git.aflabs.org'] = require('gitlinker.hosts').get_gitlab_type_url }
+        }
+      )
+    end
+  },
+
   -- NOTE: Third, plugins that require some setup, but not enugh for separate file
 
   { -- Adds git releated signs to the gutter, as well as utilities for managing changes
