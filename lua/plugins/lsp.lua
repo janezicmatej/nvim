@@ -1,6 +1,6 @@
 -- LSP settings.
 --  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
+local on_attach = function(client, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
   -- to define small helper and utility functions so you don't have to repeat yourself
   -- many times.
@@ -16,7 +16,7 @@ local on_attach = function(_, bufnr)
   end
 
   local delayed_format = function()
-    vim.lsp.buf.format({ timeout_ms = 2000 })
+    vim.lsp.buf.format { timeout_ms = 2000 }
   end
 
   require('nvim-navbuddy').attach(client, bufnr)
@@ -51,7 +51,8 @@ local on_attach = function(_, bufnr)
 end
 
 return {
-  { -- LSP Configuration & Plugins
+  {
+    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs to stdpath for neovim
@@ -73,11 +74,10 @@ return {
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
-
     config = function()
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
+        clangd = {},
+        gopls = {},
         marksman = {},
         pyright = {},
         tsserver = {},
@@ -116,18 +116,17 @@ return {
           }
         end,
       }
-    end
+    end,
   },
 
-  { -- inject lsp formatting, diagonstics etc
+  {
+    -- inject lsp formatting, diagonstics etc
     'jose-elias-alvarez/null-ls.nvim',
-
     dependencies = { 'nvim-lua/plenary.nvim' },
-
     config = function()
-      local null_ls = require("null-ls")
+      local null_ls = require 'null-ls'
 
-      null_ls.setup({
+      null_ls.setup {
         sources = {
           -- general
           null_ls.builtins.code_actions.gitsigns,
@@ -137,10 +136,10 @@ return {
           null_ls.builtins.formatting.isort,
           -- typescript
           null_ls.builtins.formatting.prettier,
-          -- rust
-          -- null_ls.builtins.formatting.rustfmt,
+          -- lua
+          null_ls.builtins.formatting.stylua,
         },
-      })
-    end
-  }
+      }
+    end,
+  },
 }

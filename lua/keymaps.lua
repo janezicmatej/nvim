@@ -31,6 +31,9 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
+-- Plugins
+vim.keymap.set('n', '<leader>nb', ":Navbuddy<CR>", { desc = '[N]av[b]uddy' })
+
 -- terminal keymaps
 function _G.set_terminal_keymaps()
   local opts = { buffer = 0 }
@@ -43,7 +46,6 @@ end
 
 --
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
-vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
-
+vim.cmd 'autocmd! TermOpen term://* lua set_terminal_keymaps()'
 
 return {}

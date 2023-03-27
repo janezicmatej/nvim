@@ -1,9 +1,8 @@
 return {
 
-  { -- Fuzzy Finder (files, lsp, etc)
+  {
+    -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
-
-
     version = '*',
     dependencies = {
       'nvim-lua/plenary.nvim',
@@ -18,7 +17,6 @@ return {
         end,
       },
     },
-
     config = function()
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
@@ -33,8 +31,8 @@ return {
         },
         pickers = {
           find_files = {
-            find_command = { "rg", "-S", "--no-ignore-vcs", "--hidden", "--files", "-g", "!.git", },
-          }
+            find_command = { 'rg', '-S', '--no-ignore-vcs', '--hidden', '--files', '-g', '!.git' },
+          },
         },
       }
 
@@ -60,17 +58,16 @@ return {
       vim.keymap.set('n', '<leader>ss', require('telescope.builtin').spell_suggest, { desc = '[S]pell [S]suggest' })
 
       vim.keymap.set('n', '<leader>sc', function()
-        require('telescope.builtin').colorscheme({ enable_preview = true })
+        require('telescope.builtin').colorscheme { enable_preview = true }
       end, { desc = '[S]earch [C]olorscheme' })
 
       -- extensions
       -- vim.keymap.set('n', '<leader>fb', require('telescope').extensions.file_browser.file_browser, { desc = '[F]ile [B]rowser' })
       vim.api.nvim_set_keymap('n', '<leader>tc', ':TodoTelescope<CR>', { desc = '[T]odo [C]omments', noremap = true })
-    end
+    end,
   },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built.
   -- Only load if `make` is available. Make sure you have the system
   -- requirements installed.
-
 }

@@ -2,7 +2,6 @@ return {
   -- NOTE: Theme
   {
     'sainnhe/gruvbox-material',
-
     priority = 1000,
     config = function()
       vim.g.gruvbox_material_background = 'soft'
@@ -31,29 +30,30 @@ return {
   { 'numToStr/Comment.nvim',       opts = {} },
 
   -- colorize in files
-  { "norcalli/nvim-colorizer.lua", opts = {} },
+  { 'norcalli/nvim-colorizer.lua', opts = {} },
 
   -- highlighting for comments
-  { "folke/todo-comments.nvim",    dependencies = "nvim-lua/plenary.nvim", opts = {} },
+  { 'folke/todo-comments.nvim',    dependencies = 'nvim-lua/plenary.nvim', opts = {} },
 
   -- markdown preview using glow
-  { "ellisonleao/glow.nvim",       config = true,                          cmd = "Glow" },
+  { 'ellisonleao/glow.nvim',       config = true,                          cmd = 'Glow' },
 
   -- permanent links to fileranges
-  { 'ruifm/gitlinker.nvim',
+  {
+    'ruifm/gitlinker.nvim',
     config = function()
-      require('gitlinker').setup(
-        {
-          callbacks = {
-            ['git.aflabs.org'] = require('gitlinker.hosts').get_gitlab_type_url }
-        }
-      )
-    end
+      require('gitlinker').setup {
+        callbacks = {
+          ['git.aflabs.org'] = require('gitlinker.hosts').get_gitlab_type_url,
+        },
+      }
+    end,
   },
 
   -- NOTE: Third, plugins that require some setup, but not enugh for separate file
 
-  { -- Adds git releated signs to the gutter, as well as utilities for managing changes
+  {
+    -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
       -- See `:help gitsigns.txt`
@@ -67,7 +67,8 @@ return {
     },
   },
 
-  { -- Set lualine as statusline
+  {
+    -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
     opts = {
@@ -81,7 +82,8 @@ return {
     },
   },
 
-  { -- Add indentation guides even on blank lines
+  {
+    -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
@@ -91,38 +93,39 @@ return {
     },
   },
 
-  { -- git blame annotations
+  {
+    -- git blame annotations
     'f-person/git-blame.nvim',
     config = function()
       vim.api.nvim_set_keymap('n', '<leader>gt', ':GitBlameToggle<CR>', { desc = '[G]it Blame [T]oggle', noremap = true })
       vim.api.nvim_set_keymap('n', '<leader>gu', ':GitBlameOpenCommitURL<CR>',
-        { desc = '[G]it Blame Open Commit [U]rl', noremap = true })
-    end
+      { desc = '[G]it Blame Open Commit [U]rl', noremap = true })
+    end,
   },
 
-  { -- a more adventurous wildmenu
+  {
+    -- a more adventurous wildmenu
     'gelguy/wilder.nvim',
-
     dependencies = { 'romgrk/fzy-lua-native' },
-
     config = function()
-      local wilder = require('wilder')
-      wilder.setup({ modes = { ':', '/', '?' } })
+      local wilder = require 'wilder'
+      wilder.setup { modes = { ':', '/', '?' } }
       -- Disable Python remote plugin
       wilder.set_option('use_python_remote_plugin', 0)
 
       wilder.set_option('pipeline', {
         wilder.branch(
-          wilder.cmdline_pipeline({
+          wilder.cmdline_pipeline {
             fuzzy = 1,
             fuzzy_filter = wilder.lua_fzy_filter(),
-          }),
+          },
           wilder.vim_search_pipeline()
-        )
+        ),
       })
 
-      wilder.set_option('renderer', wilder.popupmenu_renderer(
-        wilder.popupmenu_border_theme({
+      wilder.set_option(
+        'renderer',
+        wilder.popupmenu_renderer(wilder.popupmenu_border_theme {
           highlights = {
             border = 'Normal',
           },
@@ -131,21 +134,22 @@ return {
           left = { ' ', wilder.popupmenu_devicons() },
           right = { ' ', wilder.popupmenu_scrollbar() },
         })
-      ))
+      )
     end,
   },
 
-  { -- file tree
-    "nvim-neo-tree/neo-tree.nvim",
-    version = "*",
+  {
+    -- file tree
+    'nvim-neo-tree/neo-tree.nvim',
+    version = '*',
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-      "MunifTanjim/nui.nvim",
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'MunifTanjim/nui.nvim',
     },
     config = function()
       -- Unless you are still migrating, remove the deprecated commands from v1.x
-      vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+      vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 
       require('neo-tree').setup {
         filesystem = {
@@ -154,7 +158,7 @@ return {
             hide_dotfiles = false,
             hide_gitignored = false,
           },
-        }
+        },
       }
     end,
   },
