@@ -7,7 +7,18 @@ function leave_snippet()
   end
 end
 
-vim.api.nvim_command([[
+local border = {
+  { '╭', 'CmpBorder' },
+  { '─', 'CmpBorder' },
+  { '╮', 'CmpBorder' },
+  { '│', 'CmpBorder' },
+  { '╯', 'CmpBorder' },
+  { '─', 'CmpBorder' },
+  { '╰', 'CmpBorder' },
+  { '│', 'CmpBorder' },
+}
+
+vim.api.nvim_command [[
     autocmd ModeChanged * lua leave_snippet()
 ]])
 
@@ -74,6 +85,11 @@ return {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'copilot' },
+        },
+        window = {
+          completion = {
+            border = border,
+          },
         },
       }
     end
