@@ -139,24 +139,21 @@ return {
   },
 
   {
-    -- file tree
-    'nvim-neo-tree/neo-tree.nvim',
-    version = '*',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
-      'MunifTanjim/nui.nvim',
+    'projekt0n/circles.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    opts = {
+      icons = { empty = '●', filled = '○', lsp_prefix = '●' },
     },
-    config = function()
-      -- Unless you are still migrating, remove the deprecated commands from v1.x
-      vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
+  },
 
-      require('neo-tree').setup {
-        filesystem = {
-          filtered_items = {
-            visible = true,
-            hide_dotfiles = false,
-            hide_gitignored = false,
+  -- file menu
+  {
+    'nvim-tree/nvim-tree.lua',
+    config = function()
+      require('nvim-tree').setup {
+        renderer = {
+          icons = {
+            glyphs = require('circles').get_nvimtree_glyphs(),
           },
         },
       }
