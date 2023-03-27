@@ -19,6 +19,8 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format({ timeout_ms = 2000 })
   end
 
+  require('nvim-navbuddy').attach(client, bufnr)
+
   nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
   nmap('<leader>ff', delayed_format, '[F]ormat')
@@ -55,6 +57,15 @@ return {
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
+
+      {
+        'SmiteshP/nvim-navbuddy',
+        dependencies = {
+          'neovim/nvim-lspconfig',
+          'SmiteshP/nvim-navic',
+          'MunifTanjim/nui.nvim',
+        },
+      },
 
       -- Useful status updates for LSP
       { 'j-hui/fidget.nvim', opts = {} },
