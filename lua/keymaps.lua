@@ -33,6 +33,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- Plugins
 vim.keymap.set('n', '<leader>nb', ":Navbuddy<CR>", { desc = '[N]av[b]uddy' })
+vim.keymap.set('n', '<leader>nt', ":NeoTreeShowToggle<CR>", { desc = '[N]av[b]uddy' })
 
 -- terminal keymaps
 function _G.set_terminal_keymaps()
