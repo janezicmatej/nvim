@@ -32,6 +32,9 @@ return {
   -- colorize in files
   { 'norcalli/nvim-colorizer.lua', opts = {} },
 
+  -- autopairs on newline
+  { 'windwp/nvim-autopairs',       opts = {} },
+
   -- highlighting for comments
   { 'folke/todo-comments.nvim',    dependencies = 'nvim-lua/plenary.nvim', opts = {} },
 
