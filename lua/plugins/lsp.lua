@@ -81,7 +81,13 @@ return {
         marksman = {},
         pyright = {},
         tsserver = {},
-        rust_analyzer = {},
+        rust_analyzer = {
+          ['rust-analyzer'] = {
+            cargo = {
+              features = 'all',
+            },
+          },
+        },
         lua_ls = {
           Lua = {
             workspace = { checkThirdParty = false },
