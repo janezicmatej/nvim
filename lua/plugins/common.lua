@@ -6,7 +6,7 @@ return {
     config = function()
       vim.g.gruvbox_material_background = 'soft'
       vim.g.gruvbox_material_better_performance = 1
-      -- vim.g.gruvbox_material_enable_italic = 1
+      vim.g.gruvbox_material_enable_italic = 1
 
       vim.cmd.colorscheme 'gruvbox-material'
     end,
@@ -106,6 +106,9 @@ return {
     -- git blame annotations
     'f-person/git-blame.nvim',
     config = function()
+      -- disable on startup
+      vim.g.gitblame_enabled = 0
+
       vim.api.nvim_set_keymap('n', '<leader>gt', ':GitBlameToggle<CR>', { desc = '[G]it Blame [T]oggle', noremap = true })
       vim.api.nvim_set_keymap('n', '<leader>gu', ':GitBlameOpenCommitURL<CR>',
       { desc = '[G]it Blame Open Commit [U]rl', noremap = true })
