@@ -39,6 +39,9 @@ return {
       -- Enable telescope fzf native, if installed
       pcall(require('telescope').load_extension, 'fzf')
 
+      -- Enable harpoon
+      require('telescope').load_extension 'harpoon'
+
       -- See `:help telescope.builtin`
       vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
       vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
@@ -62,8 +65,9 @@ return {
       end, { desc = '[S]earch [C]olorscheme' })
 
       -- extensions
-      -- vim.keymap.set('n', '<leader>fb', require('telescope').extensions.file_browser.file_browser, { desc = '[F]ile [B]rowser' })
-      vim.api.nvim_set_keymap('n', '<leader>tc', ':TodoTelescope<CR>', { desc = '[T]odo [C]omments', noremap = true })
+      vim.api.nvim_set_keymap('n', '<leader>tc', ':TodoTelescope<CR>', { desc = '[T]odo [c]omments', noremap = true })
+      vim.api.nvim_set_keymap('n', '<leader>hm', ':Telescope harpoon marks<CR>',
+      { desc = '[H]arpoon [m]arks', noremap = true })
     end,
   },
 
