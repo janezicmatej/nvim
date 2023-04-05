@@ -68,6 +68,9 @@ return {
         },
       },
 
+      -- adds extra functionality over rust_analyzer
+      'simrat39/rust-tools.nvim',
+
       -- Useful status updates for LSP
       { 'j-hui/fidget.nvim', opts = {} },
 
@@ -81,13 +84,6 @@ return {
         marksman = {},
         pyright = {},
         tsserver = {},
-        rust_analyzer = {
-          ['rust-analyzer'] = {
-            cargo = {
-              features = 'all',
-            },
-          },
-        },
         lua_ls = {
           Lua = {
             workspace = { checkThirdParty = false },
@@ -122,6 +118,37 @@ return {
           }
         end,
       }
+
+      local rust_tools_opts = {
+        tools = {
+          runnables = {
+            use_telescope = true,
+          },
+          inlay_hints = {
+            auto = true,
+            show_parameter_hints = false,
+            parameter_hints_prefix = '',
+            other_hints_prefix = '',
+          },
+        },
+        server = {
+          on_attach = on_attach,
+          settings = {
+            ['rust-analyzer'] = {
+              cargo = {
+                -- always enable all features
+                features = 'all',
+              },
+              -- use clippy on save
+              checkOnSave = {
+                command = 'clippy',
+              },
+            },
+          },
+        },
+      }
+
+      require('rust-tools').setup(rust_tools_opts)
     end,
   },
 
