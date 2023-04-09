@@ -34,13 +34,29 @@ return {
       {
         -- copilot
         'zbirenbaum/copilot.lua',
-        opts = { suggestion = { enabled = false }, panel = { enabled = false } },
+        opts = {
+          suggestion = { enabled = false },
+          panel = { enabled = false },
+          filetypes = {
+            sh = function()
+              if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
+                return false
+              end
+              return true
+            end,
+          },
+        },
       },
 
       {
         -- copilot-cmp source
         'zbirenbaum/copilot-cmp',
-        opts = { clear_after_cursor = true },
+        config = function()
+          require('copilot_cmp').setup { clear_after_cursor = true }
+
+          vim.keymap.set('n', '<leader>cd', ":Copilot disable<CR>", { desc = '[C]opilot [d]isable' })
+          vim.keymap.set('n', '<leader>ce', ":Copilot enable<CR>", { desc = '[C]opilot [e]nable' })
+        end,
       },
     },
     config = function()
