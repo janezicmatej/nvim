@@ -38,6 +38,15 @@ return {
   -- highlighting for comments
   { 'folke/todo-comments.nvim',    dependencies = 'nvim-lua/plenary.nvim', opts = {} },
 
+  -- newage search plugin
+  {
+    'ggandor/leap.nvim',
+    dependencies = { 'tpope/vim-repeat' },
+    config = function()
+      require('leap').add_default_mappings()
+    end,
+  },
+
   -- permanent links to fileranges
   {
     'ruifm/gitlinker.nvim',
