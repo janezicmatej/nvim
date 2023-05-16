@@ -38,6 +38,9 @@ return {
   -- highlighting for comments
   { 'folke/todo-comments.nvim',    dependencies = 'nvim-lua/plenary.nvim', opts = {} },
 
+  -- cargo crates
+  { 'saecki/crates.nvim',          dependencies = 'nvim-lua/plenary.nvim', opts = {} },
+
   -- newage search plugin
   {
     'ggandor/leap.nvim',
@@ -114,10 +117,11 @@ return {
   {
     -- git blame annotations
     'f-person/git-blame.nvim',
-    config = function()
+    init = function()
       -- disable on startup
       vim.g.gitblame_enabled = 0
-
+    end,
+    config = function()
       vim.api.nvim_set_keymap('n', '<leader>gt', ':GitBlameToggle<CR>', { desc = '[G]it Blame [T]oggle', noremap = true })
       vim.api.nvim_set_keymap('n', '<leader>gu', ':GitBlameOpenCommitURL<CR>',
       { desc = '[G]it Blame Open Commit [U]rl', noremap = true })
@@ -176,6 +180,14 @@ return {
           icons = {
             glyphs = require('circles').get_nvimtree_glyphs(),
           },
+        },
+        filters = {
+          custom = {
+            '__pycache__',
+          },
+        },
+        git = {
+          ignore = false,
         },
       }
     end,
