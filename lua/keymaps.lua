@@ -7,12 +7,18 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set('n', '<Up>', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', '<Down>', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Remap for vertical navigation
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { noremap = true, silent = true })
 vim.keymap.set('n', 'n', 'nzzzv', { noremap = true, silent = true })
 vim.keymap.set('n', 'N', 'Nzzzv', { noremap = true, silent = true })
+
+-- Remap for moving selected line / block of text in visual mode
+vim.keymap.set('v', '<M-k>', ":m '<-2<cr>gv=gv", { desc = 'Move selected lines up' })
+vim.keymap.set('v', '<M-j>', ":m '>+1<cr>gv=gv", { desc = 'move selected lines down' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -32,8 +38,8 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float)
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- Plugins
-vim.keymap.set('n', '<leader>nb', ":Navbuddy<CR>", { desc = '[N]av[b]uddy' })
-vim.keymap.set('n', '<leader>nt', ":NvimTreeToggle<CR>", { desc = '[N]vim[T]ree' })
+vim.keymap.set('n', '<leader>nb', ':Navbuddy<CR>', { desc = '[N]av[b]uddy' })
+vim.keymap.set('n', '<leader>nt', ':NvimTreeToggle<CR>', { desc = '[N]vim[T]ree' })
 
 -- terminal keymaps
 function _G.set_terminal_keymaps()

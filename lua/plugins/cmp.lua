@@ -54,8 +54,8 @@ return {
         config = function()
           require('copilot_cmp').setup { clear_after_cursor = true }
 
-          vim.keymap.set('n', '<leader>cd', ":Copilot disable<CR>", { desc = '[C]opilot [d]isable' })
-          vim.keymap.set('n', '<leader>ce', ":Copilot enable<CR>", { desc = '[C]opilot [e]nable' })
+          vim.keymap.set('n', '<leader>cd', ':Copilot disable<CR>', { desc = '[C]opilot [d]isable' })
+          vim.keymap.set('n', '<leader>ce', ':Copilot enable<CR>', { desc = '[C]opilot [e]nable' })
         end,
       },
     },
