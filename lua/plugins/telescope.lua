@@ -31,7 +31,30 @@ return {
         },
         pickers = {
           find_files = {
-            find_command = { 'rg', '-S', '--no-ignore-vcs', '--hidden', '--files', '-g', '!.git' },
+            find_command = {
+              'rg',
+              '-S',
+              '--no-ignore-vcs',
+              '--hidden',
+              '--files',
+              '-g',
+              '!.git',
+            },
+          },
+          live_grep = {
+            grep_command = {
+              'rg',
+              '--no-ignore-vcs',
+              '--hidden',
+              '--color=never',
+              '--no-heading',
+              '--with-filename',
+              '--line-number',
+              '--column',
+              '--smart-case',
+              '-g',
+              '!.git',
+            },
           },
         },
       }
