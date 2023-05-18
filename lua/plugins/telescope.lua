@@ -89,8 +89,7 @@ return {
 
       -- extensions
       vim.api.nvim_set_keymap('n', '<leader>tc', ':TodoTelescope<CR>', { desc = '[T]odo [c]omments', noremap = true })
-      vim.api.nvim_set_keymap('n', '<leader>hm', ':Telescope harpoon marks<CR>',
-      { desc = '[H]arpoon [m]arks', noremap = true })
+      vim.api.nvim_set_keymap('n', '<leader>hm', ':Telescope harpoon marks<CR>', { desc = '[H]arpoon [m]arks', noremap = true })
     end,
   },
 

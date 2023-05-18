@@ -24,22 +24,22 @@ return {
   -- NOTE: Second, plugins that require setup call (done via opts)
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',        opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim',       opts = {} },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- colorize in files
   { 'norcalli/nvim-colorizer.lua', opts = {} },
 
   -- autopairs on newline
-  { 'windwp/nvim-autopairs',       opts = {} },
+  { 'windwp/nvim-autopairs', opts = {} },
 
   -- highlighting for comments
-  { 'folke/todo-comments.nvim',    dependencies = 'nvim-lua/plenary.nvim', opts = {} },
+  { 'folke/todo-comments.nvim', dependencies = 'nvim-lua/plenary.nvim', opts = {} },
 
   -- cargo crates
-  { 'saecki/crates.nvim',          dependencies = 'nvim-lua/plenary.nvim', opts = {} },
+  { 'saecki/crates.nvim', dependencies = 'nvim-lua/plenary.nvim', opts = {} },
 
   -- newage search plugin
   {
@@ -123,8 +123,7 @@ return {
     end,
     config = function()
       vim.api.nvim_set_keymap('n', '<leader>gt', ':GitBlameToggle<CR>', { desc = '[G]it Blame [T]oggle', noremap = true })
-      vim.api.nvim_set_keymap('n', '<leader>gu', ':GitBlameOpenCommitURL<CR>',
-      { desc = '[G]it Blame Open Commit [U]rl', noremap = true })
+      vim.api.nvim_set_keymap('n', '<leader>gu', ':GitBlameOpenCommitURL<CR>', { desc = '[G]it Blame Open Commit [U]rl', noremap = true })
     end,
   },
 
