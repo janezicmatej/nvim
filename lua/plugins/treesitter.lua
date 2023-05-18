@@ -5,7 +5,6 @@ return {
     'nvim-treesitter/nvim-treesitter-textobjects',
     'nvim-treesitter/nvim-treesitter-context',
     'nvim-treesitter/nvim-treesitter-refactor',
-    'mrjones2014/nvim-ts-rainbow',
   },
   config = function()
     pcall(require('nvim-treesitter.install').update { with_sync = true })
