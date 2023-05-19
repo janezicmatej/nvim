@@ -8,20 +8,14 @@ function leave_snippet()
   end
 end
 
-local border = {
-  { '╭', 'CmpBorder' },
-  { '─', 'CmpBorder' },
-  { '╮', 'CmpBorder' },
-  { '│', 'CmpBorder' },
-  { '╯', 'CmpBorder' },
-  { '─', 'CmpBorder' },
-  { '╰', 'CmpBorder' },
-  { '│', 'CmpBorder' },
-}
-
 vim.api.nvim_command [[
     autocmd ModeChanged * lua leave_snippet()
 ]]
+
+vim.cmd 'highlight! link CmpPmenu         Pmenu'
+vim.cmd 'highlight! link CmpPmenuBorder   Pmenu'
+vim.cmd 'highlight! CmpPmenu         guibg=#282828'
+vim.cmd 'highlight! CmpPmenuBorder   guifg=#615750'
 
 return {
   {
@@ -35,8 +29,11 @@ return {
       -- nvim-cmp setup
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
+      local border = require('utils').nvim_open_win_border
 
       luasnip.config.setup {}
+
+      local highlight_opts = 'Normal:CmpPmenu,FloatBorder:CmpPmenuBorder,CursorLine:PmenuSel,Search:None'
 
       cmp.setup {
         snippet = {
@@ -78,7 +75,13 @@ return {
         },
         window = {
           completion = {
-            border = border,
+            border = border 'CmpBorder',
+            side_padding = 1,
+            winhighlight = highlight_opts,
+          },
+          documentation = {
+            border = border 'CmpDocBorder',
+            winhighlight = highlight_opts,
           },
         },
       }
