@@ -145,26 +145,4 @@ return {
       icons = { empty = '●', filled = '○', lsp_prefix = '●' },
     },
   },
-
-  -- file menu
-  {
-    'nvim-tree/nvim-tree.lua',
-    config = function()
-      require('nvim-tree').setup {
-        renderer = {
-          icons = {
-            glyphs = require('circles').get_nvimtree_glyphs(),
-          },
-        },
-        filters = {
-          custom = {
-            '__pycache__',
-          },
-        },
-        git = {
-          ignore = false,
-        },
-      }
-    end,
-  },
 }
