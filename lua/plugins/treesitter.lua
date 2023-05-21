@@ -29,11 +29,6 @@ return {
           node_decremental = '<C-Bslash>',
         },
       },
-      -- rainbow
-      rainbow = {
-        enable = true,
-        extended_mode = true,
-      },
       -- refactor
       refactor = {
         highlight_definitions = { enable = true, clear_on_cursor_move = true },
