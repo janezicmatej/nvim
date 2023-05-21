@@ -25,7 +25,7 @@ return {
         keymaps = {
           init_selection = '<C-Space>',
           node_incremental = '<C-Space>',
-          scope_incremental = '<C-Space>',
+          scope_incremental = '<C-M-Space>',
           node_decremental = '<C-Bslash>',
         },
       },
