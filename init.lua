@@ -24,6 +24,50 @@ require 'autocmd'
 require 'keymaps'
 
 require('lazy').setup({
+  {
+    -- NOTE: Theme
+    'sainnhe/gruvbox-material',
+    priority = 1000,
+    lazy = false,
+    config = function()
+      vim.g.gruvbox_material_background = 'soft'
+      vim.g.gruvbox_material_better_performance = 1
+      vim.g.gruvbox_material_enable_italic = 1
+
+      vim.cmd.colorscheme 'gruvbox-material'
+    end,
+  },
+
+  -- NOTE: First, some plugins that don't require any configuration
+
+  -- Git related plugins
+  'tpope/vim-fugitive',
+  'tpope/vim-rhubarb',
+
+  -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-sleuth',
+
+  -- NOTE: Second, plugins that require setup call (done via opts)
+
+  -- Useful plugin to show you pending keybinds.
+  { 'folke/which-key.nvim', opts = {} },
+
+  -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim', opts = {} },
+
+  -- colorize in files
+  { 'norcalli/nvim-colorizer.lua', opts = {} },
+
+  -- autopairs on newline
+  { 'windwp/nvim-autopairs', opts = {} },
+
+  -- highlighting for comments
+  { 'folke/todo-comments.nvim', dependencies = 'nvim-lua/plenary.nvim', opts = {} },
+
+  -- cargo crates
+  { 'saecki/crates.nvim', dependencies = 'nvim-lua/plenary.nvim', opts = {} },
+
+  -- import other plugins
   { import = 'plugins' },
 }, {})
 
