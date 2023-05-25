@@ -19,11 +19,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require 'options'
+require 'autocmd'
+require 'keymaps'
+
 require('lazy').setup({
-  { import = 'options' },
-  { import = 'keymaps' },
   { import = 'plugins' },
-  { import = 'autocmd' },
 }, {})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
