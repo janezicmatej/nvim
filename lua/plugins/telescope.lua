@@ -38,7 +38,7 @@ return {
               '--hidden',
               '--files',
               '-g',
-              '!.git',
+              '!.git/',
             },
           },
           live_grep = {
@@ -53,7 +53,7 @@ return {
               '--column',
               '--smart-case',
               '-g',
-              '!.git',
+              '!.git/',
             },
           },
         },
