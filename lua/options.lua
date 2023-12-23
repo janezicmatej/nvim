@@ -2,8 +2,8 @@
 -- See `:help vim.o`
 
 -- disable netrw
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- Set highlight on search
 vim.o.hlsearch = true
@@ -13,9 +13,6 @@ vim.wo.number = true
 
 -- Make line numbers relative
 vim.wo.relativenumber = true
-
--- Enable mouse mode
-vim.o.mouse = 'a'
 
 -- Enable break indent
 vim.o.breakindent = true

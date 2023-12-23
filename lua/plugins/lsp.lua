@@ -52,7 +52,7 @@ return {
       'simrat39/rust-tools.nvim',
 
       -- Useful status updates for LSP
-      { 'j-hui/fidget.nvim', opts = {}, tag='legacy' },
+      { 'j-hui/fidget.nvim', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -101,30 +101,24 @@ return {
 
       local rust_tools_opts = {
         tools = {
-          runnables = {
-            use_telescope = true,
-          },
           inlay_hints = {
-            auto = true,
-            show_parameter_hints = false,
-            parameter_hints_prefix = '',
-            other_hints_prefix = '',
+            auto = false,
           },
         },
         server = {
           on_attach = on_attach,
-          settings = {
-            ['rust-analyzer'] = {
-              cargo = {
-                -- always enable all features
-                features = 'all',
-              },
-              -- use clippy on save
-              checkOnSave = {
-                command = 'clippy',
-              },
-            },
-          },
+          -- settings = {
+          --   ['rust-analyzer'] = {
+          --     cargo = {
+          --       -- always enable all features
+          --       features = 'all',
+          --     },
+          --     -- use clippy on save
+          --     checkOnSave = {
+          --       command = 'clippy',
+          --     },
+          --   },
+          -- },
         },
       }
 

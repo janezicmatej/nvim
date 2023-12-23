@@ -20,17 +20,6 @@ vim.keymap.set('n', 'N', 'Nzzzv', { noremap = true, silent = true })
 vim.keymap.set('v', '<M-k>', ":m '<-2<cr>gv=gv", { desc = 'Move selected lines up' })
 vim.keymap.set('v', '<M-j>', ":m '>+1<cr>gv=gv", { desc = 'Move selected lines down' })
 
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
-
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
@@ -39,3 +28,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- terminal
 vim.keymap.set('t', '<C-x>', vim.api.nvim_replace_termcodes('<C-\\><C-N>', true, true, true), { desc = 'Escape terminal mode' })
+
+-- disabling highlight
+vim.keymap.set('n', '<leader>hh', ':noh<CR>', { desc = 'No highlight search' })

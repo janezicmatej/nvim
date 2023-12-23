@@ -1,6 +1,6 @@
 return {
   -- inject lsp formatting, diagonstics etc
-  'jose-elias-alvarez/null-ls.nvim',
+  'nvimtools/none-ls.nvim',
   dependencies = { 'nvim-lua/plenary.nvim' },
   config = function()
     local null_ls = require 'null-ls'
