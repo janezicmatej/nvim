@@ -107,18 +107,18 @@ return {
         },
         server = {
           on_attach = on_attach,
-          -- settings = {
-          --   ['rust-analyzer'] = {
-          --     cargo = {
-          --       -- always enable all features
-          --       features = 'all',
-          --     },
-          --     -- use clippy on save
-          --     checkOnSave = {
-          --       command = 'clippy',
-          --     },
-          --   },
-          -- },
+          settings = {
+            ['rust-analyzer'] = {
+              cargo = {
+                -- always enable all features
+                features = 'all',
+              },
+              -- use clippy on save
+              checkOnSave = {
+                command = 'clippy',
+              },
+            },
+          },
         },
       }
 
