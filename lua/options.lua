@@ -36,3 +36,10 @@ vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 
 vim.o.termguicolors = true
+
+-- eol chars
+vim.opt.list = true
+vim.opt.listchars = {
+  eol = '󰌑',
+  tab = '<->',
+}
