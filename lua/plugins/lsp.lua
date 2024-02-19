@@ -37,6 +37,9 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
+
+  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, { command = 'lua pcall(vim.lsp.buf.document_highlight)', buffer = bufnr })
+  vim.api.nvim_create_autocmd({ 'CursorMoved' }, { command = 'lua pcall(vim.lsp.buf.clear_references)', buffer = bufnr })
 end
 
 return {
@@ -49,7 +52,11 @@ return {
       'williamboman/mason-lspconfig.nvim',
 
       -- adds extra functionality over rust_analyzer
-      'simrat39/rust-tools.nvim',
+      {
+        'mrcjkb/rustaceanvim',
+        version = '^4',
+        ft = { 'rust' },
+      },
 
       -- Useful status updates for LSP
       { 'j-hui/fidget.nvim', opts = {} },
@@ -99,7 +106,7 @@ return {
         end,
       }
 
-      local rust_tools_opts = {
+      vim.g.rustaceanvim = {
         tools = {
           inlay_hints = {
             auto = false,
@@ -117,12 +124,12 @@ return {
               checkOnSave = {
                 command = 'clippy',
               },
+              -- leave rainbow higlightifg to plugin
+              rainbowHighlightOn = false,
             },
           },
         },
       }
-
-      require('rust-tools').setup(rust_tools_opts)
     end,
   },
 }
