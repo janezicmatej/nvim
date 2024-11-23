@@ -13,3 +13,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = highlight_group,
   pattern = '*',
 })
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*.gitlab-ci*.{yml,yaml}',
+  callback = function()
+    vim.bo.filetype = 'yaml.gitlab'
+  end,
+})
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = vim.fn.expand '~' .. '/.ssh/config.d/*.config',
+  callback = function()
+    vim.bo.filetype = 'sshconfig'
+  end,
+})
