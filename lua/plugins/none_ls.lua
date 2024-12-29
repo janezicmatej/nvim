@@ -1,23 +1,22 @@
 return {
   -- inject lsp formatting, diagonstics etc
   'nvimtools/none-ls.nvim',
-  dependencies = { 'nvim-lua/plenary.nvim' },
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+  },
   config = function()
-    local null_ls = require 'null-ls'
+    local none_ls = require 'null-ls'
 
-    null_ls.setup {
+    none_ls.setup {
       sources = {
         -- general
-        null_ls.builtins.code_actions.gitsigns,
+        none_ls.builtins.code_actions.gitsigns,
         -- python
-        -- null_ls.builtins.diagnostics.pylint,
-        null_ls.builtins.formatting.black,
-        -- null_ls.builtins.formatting.isort,
-        null_ls.builtins.diagnostics.ruff,
+        -- none_ls.builtins.formatting.black,
         -- typescript
-        null_ls.builtins.formatting.prettier,
+        none_ls.builtins.formatting.prettier,
         -- lua
-        null_ls.builtins.formatting.stylua,
+        none_ls.builtins.formatting.stylua,
       },
     }
   end,

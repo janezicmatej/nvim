@@ -1,109 +1,141 @@
-local on_attach = function(_, bufnr)
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
+vim.api.nvim_create_autocmd('LspAttach', {
+  group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+  callback = function(event)
+    local map = function(keys, func, desc, mode)
+      mode = mode or 'n'
+      vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
     end
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-  end
 
-  local delayed_format = function()
-    vim.lsp.buf.format { timeout_ms = 2000 }
-  end
+    map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+    map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction', { 'n', 'x' })
+    map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+    map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+    map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+    map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+    map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+    map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+    map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-  nmap('<leader>ff', delayed_format, '[F]ormat')
+    local delayed_format = function()
+      vim.lsp.buf.format { timeout_ms = 2000 }
+    end
 
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-  nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+    map('<leader>ff', delayed_format, '[F]ormat')
+    --
+    -- -- See `:help K` for why this keymap
+    -- nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+    -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
-  -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+      local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
+      vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+        buffer = event.buf,
+        group = highlight_augroup,
+        callback = vim.lsp.buf.document_highlight,
+      })
 
-  -- Lesser used LSP functionality
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
+      vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+        buffer = event.buf,
+        group = highlight_augroup,
+        callback = vim.lsp.buf.clear_references,
+      })
 
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
+      vim.api.nvim_create_autocmd('LspDetach', {
+        group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
+        callback = function(event2)
+          vim.lsp.buf.clear_references()
+          vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+        end,
+      })
+    end
 
-  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, { command = 'lua pcall(vim.lsp.buf.document_highlight)', buffer = bufnr })
-  vim.api.nvim_create_autocmd({ 'CursorMoved' }, { command = 'lua pcall(vim.lsp.buf.clear_references)', buffer = bufnr })
-end
+    if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+      map('<leader>th', function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf })
+      end, '[T]oggle Inlay [H]ints')
+    end
+  end,
+})
 
 return {
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
 
-      -- adds extra functionality over rust_analyzer
+      -- Automatically install LSPs and related tools to stdpath for Neovim
+      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
+      'williamboman/mason-lspconfig.nvim',
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
+
+      -- Useful status updates for LSP.
+      { 'j-hui/fidget.nvim', opts = {} },
+
+      -- Allows extra capabilities provided by nvim-cmp
+      'hrsh7th/cmp-nvim-lsp',
+
       {
         'mrcjkb/rustaceanvim',
         version = '^4',
         ft = { 'rust' },
       },
 
-      -- Useful status updates for LSP
-      { 'j-hui/fidget.nvim', opts = {} },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
+      {
+        -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
+        -- used for completion, annotations and signatures of Neovim apis
+        'folke/lazydev.nvim',
+        ft = 'lua',
+        opts = {
+          library = {
+            -- Load luvit types when the `vim.uv` word is found
+            { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+          },
+        },
+      },
+      { 'Bilal2453/luvit-meta', lazy = true },
     },
     config = function()
       local servers = {
         clangd = {},
-        gopls = {},
         marksman = {},
-        pyright = {},
-        tsserver = {},
+        gopls = {},
+        ruff = {},
+        pyright = {
+          pyright = {
+            disableOrganizeImports = true,
+          },
+        },
+        ts_ls = {},
         lua_ls = {
           Lua = {
             workspace = { checkThirdParty = false },
             telemetry = { enable = false },
           },
         },
+        stylua = {},
       }
 
-      -- Setup neovim lua configuration
-      require('neodev').setup()
-
-      -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+      capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
       -- Setup mason so it can manage external tooling
       require('mason').setup()
 
       -- Ensure the servers above are installed
-      local mason_lspconfig = require 'mason-lspconfig'
+      require('mason-tool-installer').setup { ensure_installed = vim.tbl_keys(servers) }
 
-      mason_lspconfig.setup {
-        ensure_installed = vim.tbl_keys(servers),
-      }
-
-      mason_lspconfig.setup_handlers {
-        function(server_name)
-          require('lspconfig')[server_name].setup {
-            capabilities = capabilities,
-            on_attach = on_attach,
-            settings = servers[server_name],
-          }
-        end,
+      require('mason-lspconfig').setup {
+        handlers = {
+          function(server_name)
+            local server = servers[server_name] or {}
+            -- This handles overriding only values explicitly passed
+            -- by the server configuration above. Useful when disabling
+            -- certain features of an LSP (for example, turning off formatting for ts_ls)
+            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            require('lspconfig')[server_name].setup(server)
+          end,
+        },
       }
 
       vim.g.rustaceanvim = {
@@ -113,7 +145,6 @@ return {
           },
         },
         server = {
-          on_attach = on_attach,
           settings = {
             ['rust-analyzer'] = {
               cargo = {
@@ -124,8 +155,13 @@ return {
               checkOnSave = {
                 command = 'clippy',
               },
-              -- leave rainbow higlightifg to plugin
+              -- leave rainbow higlight to plugin
               rainbowHighlightOn = false,
+              useLibraryCodeForTypes = true,
+              autoSearchPaths = true,
+              autoImportCompletions = false,
+              reportMissingImports = true,
+              followImportForHints = true,
             },
           },
         },
