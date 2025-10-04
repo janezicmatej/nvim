@@ -23,7 +23,9 @@ _G.Config = {}
 -- import other plugins
 local r = function(m) require("plugins." .. m) end
 
-local order = {}
+local order = {
+    "colorscheme",
+}
 
 for _, m in ipairs(order) do
     r(m)
