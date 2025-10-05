@@ -1,4 +1,4 @@
--- Bootstrap 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
+-- bootstrap 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
 local mini_path = vim.fn.stdpath("data") .. "/site/pack/deps/start/mini.nvim"
 if not vim.loop.fs_stat(mini_path) then
     vim.cmd('echo "Installing `mini.nvim`" | redraw')
@@ -14,10 +14,10 @@ if not vim.loop.fs_stat(mini_path) then
     vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 
--- Set up 'mini.deps' immediately to have its `now()` and `later()` helpers
+-- set up 'mini.deps' immediately to have its `now()` and `later()` helpers
 require("mini.deps").setup()
 
--- Also setup this user command to always save a new lockfile after update
+-- also setup this user command to always save a new lockfile after update
 vim.api.nvim_create_user_command("DepsUpdateSnapSave", function(opts)
     local name = opts.args ~= "" and opts.args or nil
     MiniDeps.update(name)
@@ -37,18 +37,28 @@ end, {
     end,
 })
 
--- Define main config table to be able to use it in scripts
+-- define main config table to be able to use it in scripts
 _G.Config = {}
 
--- import other plugins
-local r = function(m) require("plugins." .. m) end
+-- dyncamically import lua/plugins/*.lua
+local path = vim.fn.stdpath("config") .. "/lua/plugins"
 
-local order = {
-    "colorscheme",
-    "oil",
-    "fzf_lua",
-}
+local plugins = vim.iter(vim.fs.dir(path))
+    :filter(function(n, t) return t == "file" and n:match("%.lua") end)
+    :map(function(n, _)
+        local s, _ = n:gsub("%.lua$", "")
+        return s
+    end)
+    :totable()
 
-for _, m in ipairs(order) do
-    r(m)
+-- gather errors so any vim.notify overrides happen
+local errors = {}
+
+for _, p in ipairs(plugins) do
+    local ok, err = pcall(require, "plugins." .. p)
+    if not ok then table.insert(errors, "'" .. p .. ".lua'\n\t" .. err) end
+end
+
+for _, error in ipairs(errors) do
+    vim.notify(error, vim.log.levels.ERROR)
 end
