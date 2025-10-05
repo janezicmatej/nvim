@@ -17,6 +17,26 @@ end
 -- Set up 'mini.deps' immediately to have its `now()` and `later()` helpers
 require("mini.deps").setup()
 
+-- Also setup this user command to always save a new lockfile after update
+vim.api.nvim_create_user_command("DepsUpdateSnapSave", function(opts)
+    local name = opts.args ~= "" and opts.args or nil
+    MiniDeps.update(name)
+    MiniDeps.snap_save()
+end, {
+    desc = "Update MiniDeps plugins and save snapshot",
+    nargs = "?",
+    complete = function(arg, _, _)
+        local session_names = vim.tbl_map(
+            function(s) return s.name end,
+            MiniDeps.get_session()
+        )
+        return vim.tbl_filter(
+            function(n) return vim.startswith(n, arg) end,
+            session_names
+        )
+    end,
+})
+
 -- Define main config table to be able to use it in scripts
 _G.Config = {}
 
