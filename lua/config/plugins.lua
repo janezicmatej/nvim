@@ -25,6 +25,7 @@ local r = function(m) require("plugins." .. m) end
 
 local order = {
     "colorscheme",
+    "oil",
 }
 
 for _, m in ipairs(order) do
