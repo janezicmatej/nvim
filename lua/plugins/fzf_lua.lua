@@ -7,12 +7,11 @@ later(function()
     fzf.setup({
         files = {
             no_ignore = true,
-            rg_opts = [[--color=never --hidden --no-ignore-vcs --files -g "!.git"]],
-            fd_opts = [[--color=never --hidden --type f --type l --ignore-file .ignore --exclude .git]],
+            toggle_ignore_flag = "--no-ignore-vcs",
         },
         grep = {
             no_ignore = true,
-            rg_opts = "--column --hidden --no-ignore-vcs --line-number --no-heading --color=always --smart-case --max-columns=4096 -e",
+            toggle_ignore_flag = "--no-ignore-vcs",
         },
     })
 
