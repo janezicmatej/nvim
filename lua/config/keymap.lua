@@ -5,6 +5,12 @@ vim.keymap.set("n", "N", "Nzz", { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 
+vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
+vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
+
+vim.keymap.set("v", "<M-k>", ":m '<-2<cr>gv=gv")
+vim.keymap.set("v", "<M-j>", ":m '>+1<cr>gv=gv")
+
 vim.keymap.set(
     "t",
     "<C-x>",
