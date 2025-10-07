@@ -41,7 +41,7 @@ return {
 
         -- Override global "Go to source" mapping with dedicated buffer-local
         local opts = { buffer = buf_id, desc = "Lua source definition" }
-        vim.keymap.set("n", "<Leader>ls", luals_unique_definition, opts)
+        vim.keymap.set("n", "<Leader>ld", luals_unique_definition, opts)
     end,
     settings = {
         Lua = {
