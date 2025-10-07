@@ -1,7 +1,5 @@
-add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
-
-later(function()
-    add("ibhagwan/fzf-lua")
+MiniDeps.later(function()
+    MiniDeps.add("ibhagwan/fzf-lua")
 
     local fzf = require("fzf-lua")
     fzf.setup({

@@ -1,7 +1,5 @@
-add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
-
-now(function()
-    add("sainnhe/gruvbox-material")
+MiniDeps.now(function()
+    MiniDeps.add("sainnhe/gruvbox-material")
 
     vim.o.background = "dark"
     vim.g.gruvbox_material_background = "light"

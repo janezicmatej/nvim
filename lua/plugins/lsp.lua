@@ -1,7 +1,5 @@
-add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
-
-later(function()
-    add("neovim/nvim-lspconfig")
+MiniDeps.later(function()
+    MiniDeps.add("neovim/nvim-lspconfig")
 
     vim.lsp.enable({
         "pyright",
