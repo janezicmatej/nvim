@@ -36,3 +36,9 @@ vim.o.completeopt = "menuone,noselect,fuzzy,nosort"
 
 -- default plus added dash
 vim.o.iskeyword = "@,48-57,_,192-255,-"
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+    desc = "highlight when yanking text",
+    group = vim.api.nvim_create_augroup("CustomHighlightYank", { clear = true }),
+    callback = function() vim.highlight.on_yank() end,
+})
