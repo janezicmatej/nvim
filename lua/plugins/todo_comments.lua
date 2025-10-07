@@ -1,0 +1,5 @@
+MiniDeps.now(function()
+    MiniDeps.add("folke/todo-comments.nvim")
+    MiniDeps.add("nvim-lua/plenary.nvim")
+    require("todo-comments").setup()
+end)
