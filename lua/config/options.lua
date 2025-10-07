@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
 -- disable netrw
 vim.g.loaded_netrw = 1
