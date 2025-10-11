@@ -7,6 +7,11 @@ local function default_header()
     return ("good %s, %s"):format(day_part, username)
 end
 
+local function reinstall_treesitter()
+    local ts = require("nvim-treesitter")
+    ts.install(ts.get_installed(), { force = true })
+end
+
 MiniDeps.now(function()
     require("mini.starter").setup({
         query_updaters = "abcdefghijklmnopqrstuvwxyz0123456789_.",
@@ -16,12 +21,14 @@ MiniDeps.now(function()
         items = {
             --stylua: ignore start
             -- builtins
-            { name = "edit new buffer",     action = "enew",         section = "builtin actions" },
-            { name = "quit neovim",         action = "qall",         section = "builtin actions" },
+            { name = "edit new buffer",              action = "enew",               section = "builtin actions" },
+            { name = "quit neovim",                  action = "qall",               section = "builtin actions" },
             -- dependencies
-            { name = "update dependencies", action = "DepsUpdate",   section = "dependencies" },
-            { name = "snap dependencies",   action = "DepsSnapSave", section = "dependencies" },
-            { name = "load dependencies",   action = "DepsSnapLoad", section = "dependencies" },
+            { name = "update dependencies",          action = "DepsUpdate",         section = "dependencies" },
+            { name = "snap dependencies",            action = "DepsSnapSave",       section = "dependencies" },
+            { name = "load dependencies",            action = "DepsSnapLoad",       section = "dependencies" },
+            -- debug
+            { name = "reinstall treesitter parsers", action = reinstall_treesitter, section = "debug" },
             --stylua: ignore end
         },
     })
