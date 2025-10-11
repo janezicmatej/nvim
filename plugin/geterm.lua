@@ -6,8 +6,19 @@
 local state = {}
 
 ---@param n integer
+local function get_from_state(n)
+    local term_buf = state[n]
+    if term_buf ~= nil and vim.api.nvim_buf_is_valid(term_buf.buf_id) then
+        return term_buf
+    end
+
+    state[n] = nil
+    return nil
+end
+
+---@param n integer
 local function get_or_create_term(n)
-    if state[n] ~= nil then
+    if get_from_state(n) ~= nil then
         vim.api.nvim_win_set_buf(0, state[n].buf_id)
         return
     end
