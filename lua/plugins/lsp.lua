@@ -10,6 +10,8 @@ MiniDeps.later(function()
         "ruff",
         "stylua",
         "lua_ls",
+        "nixd",
+        "nil_ls",
     })
 
     vim.api.nvim_create_autocmd("LspAttach", {
