@@ -12,6 +12,7 @@ MiniDeps.later(function()
         "lua_ls",
         "nixd",
         "nil_ls",
+        "docker_language_server",
     })
 
     vim.api.nvim_create_autocmd("LspAttach", {
