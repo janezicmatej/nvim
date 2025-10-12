@@ -33,16 +33,19 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- osc52 escape codes copy
+local function ocs52_paste_fail()
+    vim.notify("can't paste via osc52", vim.log.levels.WARN)
+    return {}
+end
 vim.g.clipboard = {
     name = "osc52-writeonly",
     copy = {
         ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+        ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
     },
     paste = {
-        ["+"] = function()
-            vim.notify("can't paste via osc52", vim.log.levels.WARN)
-            return {}
-        end,
+        ["+"] = ocs52_paste_fail,
+        ["*"] = ocs52_paste_fail,
     },
 }
 
