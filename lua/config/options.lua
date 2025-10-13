@@ -32,6 +32,15 @@ vim.o.expandtab = true
 vim.o.ignorecase = true
 vim.o.smartcase = true
 
+-- diagnostic show virtual text
+vim.diagnostic.config({ virtual_text = true })
+local function swap_diagnostic()
+    local virtext = vim.diagnostic.config().virtual_text
+    local virlines = vim.diagnostic.config().virtual_lines
+    vim.diagnostic.config({ virtual_text = not virtext, virtual_lines = not virlines })
+end
+vim.keymap.set("n", "<leader>dt", swap_diagnostic)
+
 -- osc52 escape codes copy
 local function ocs52_paste_fail()
     vim.notify("can't paste via osc52", vim.log.levels.WARN)
