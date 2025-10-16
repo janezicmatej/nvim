@@ -58,6 +58,36 @@ MiniDeps.later(function()
                 "format"
             )
 
+            local tD_dH = vim.lsp.protocol.Methods.textDocument_documentHighlight
+            if client and client.supports_method(tD_dH) then
+                local ag = vim.api.nvim_create_augroup
+                local ac = vim.api.nvim_create_autocmd
+                local g = ag("custom-lsp-tD_dH-highlight", { clear = false })
+
+                ac({ "CursorHold", "CursorHoldI" }, {
+                    buffer = bufnr,
+                    group = g,
+                    callback = vim.lsp.buf.document_highlight,
+                })
+
+                ac({ "CursorMoved", "CursorMovedI" }, {
+                    buffer = bufnr,
+                    group = g,
+                    callback = vim.lsp.buf.clear_references,
+                })
+
+                ac("LspDetach", {
+                    group = ag("custom-lsp-detach", { clear = true }),
+                    callback = function(e)
+                        vim.lsp.buf.clear_references()
+                        vim.api.nvim_clear_autocmds({
+                            group = "custom-lsp-tD_dH-highlight",
+                            buffer = e.buf,
+                        })
+                    end,
+                })
+            end
+
             -- inlay hints
             if client and client.server_capabilities.inlayHintProvider then
                 vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })

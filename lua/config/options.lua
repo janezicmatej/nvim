@@ -13,6 +13,9 @@ vim.o.mouse = ""
 vim.o.mousescroll = "ver:0,hor:0"
 vim.o.writebackup = false
 vim.o.undofile = true
+vim.o.updatetime = 250
+vim.o.timeout = true
+vim.o.timeoutlen = 300
 
 -- ui
 vim.o.breakindent = true
