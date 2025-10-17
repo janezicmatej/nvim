@@ -5,6 +5,7 @@ MiniDeps.now(function()
     vim.g.gruvbox_material_background = "light"
     vim.g.gruvbox_material_better_performance = 1
     vim.g.gruvbox_material_diagnostic_line_highlight = 1
+    vim.g.gruvbox_material_diagnostic_text_highlight = 1
     vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
     vim.g.gruvbox_material_enable_bold = 1
     vim.g.gruvbox_material_enable_italic = 1
