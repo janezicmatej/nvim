@@ -1,7 +1,6 @@
 return {
   ["copilot.vim"] = "da369d90cfd6c396b1d0ec259836a1c7222fb2ea",
   ["fzf-lua"] = "db3ccffe79480543d8e0f7b0cac0d9b220f9486e",
-  ["git-blame.nvim"] = "54da04264ec5313d602aebea7c5dc90141696ad7",
   ["gitlinker.nvim"] = "cc59f732f3d043b626c8702cb725c82e54d35c25",
   ["gitsigns.nvim"] = "1ee5c1fd068c81f9dd06483e639c2aa4587dc197",
   ["gruvbox-material"] = "834dbf21836862300ced7444db4262b796330ab7",
