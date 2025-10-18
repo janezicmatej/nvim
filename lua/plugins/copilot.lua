@@ -19,4 +19,11 @@ now_if_args(function()
         sh = true,
         typescript = true,
     }
+
+    -- remap default <M-\> to first close pumenu if open
+    local function suggest()
+        if vim.fn.pumvisible() == 1 then vim.fn.complete(vim.fn.col("."), {}) end
+        return vim.fn["copilot#Suggest"]()
+    end
+    vim.keymap.set("i", "<M-\\>", suggest)
 end)
