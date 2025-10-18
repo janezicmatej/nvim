@@ -27,6 +27,7 @@ MiniDeps.now(function()
             { name = "update dependencies",          action = "DepsUpdate",         section = "dependencies" },
             { name = "snap dependencies",            action = "DepsSnapSave",       section = "dependencies" },
             { name = "load dependencies",            action = "DepsSnapLoad",       section = "dependencies" },
+            { name = "clean dependencies",           action = "DepsClean",          section = "dependencies" },
             -- debug
             { name = "reinstall treesitter parsers", action = reinstall_treesitter, section = "debug" },
             --stylua: ignore end
