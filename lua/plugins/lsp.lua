@@ -59,7 +59,7 @@ MiniDeps.later(function()
             )
 
             local tD_dH = vim.lsp.protocol.Methods.textDocument_documentHighlight
-            if client and client.supports_method(tD_dH) then
+            if client and client:supports_method(tD_dH) then
                 local ag = vim.api.nvim_create_augroup
                 local ac = vim.api.nvim_create_autocmd
                 local g = ag("custom-lsp-tD_dH-highlight", { clear = false })
