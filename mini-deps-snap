@@ -6,6 +6,7 @@ return {
   ["gruvbox-material"] = "834dbf21836862300ced7444db4262b796330ab7",
   ["guess-indent.nvim"] = "84a4987ff36798c2fc1169cbaff67960aed9776f",
   ["mini.nvim"] = "e04b5c69e43a6387cb3d54b75635ee432f9b853a",
+  ["nvim-autopairs"] = "7a2c97cccd60abc559344042fefb1d5a85b3e33b",
   ["nvim-lspconfig"] = "ac98db2f9f06a56498ec890a96928774eae412c3",
   ["nvim-treesitter"] = "71bf1665f804d46f7e4b24ad7ffc11f6ea5b271a",
   ["oil.nvim"] = "7e1cd7703ff2924d7038476dcbc04b950203b902",
