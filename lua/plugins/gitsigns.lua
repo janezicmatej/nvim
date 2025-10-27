@@ -11,10 +11,10 @@ MiniDeps.later(function()
     })
 
     -- blame
-    vim.keymap.set({"n", "v"}, "<leader>gb", ":Gitsigns blame<CR>")
-    vim.keymap.set({"n", "v"}, "<leader>gt", ":Gitsigns blame_line<CR>")
+    vim.keymap.set({ "n", "v" }, "<leader>gb", ":Gitsigns blame<CR>")
+    vim.keymap.set({ "n", "v" }, "<leader>gt", ":Gitsigns blame_line<CR>")
 
     -- hunks
-    vim.keymap.set({"n", "v"}, "<leader>ga", ":Gitsigns stage_hunk<CR>")
-    vim.keymap.set({"n", "v"}, "<leader>gr", ":Gitsigns reset_hunk<CR>")
+    vim.keymap.set({ "n", "v" }, "<leader>ga", ":Gitsigns stage_hunk<CR>")
+    vim.keymap.set({ "n", "v" }, "<leader>gr", ":Gitsigns reset_hunk<CR>")
 end)
