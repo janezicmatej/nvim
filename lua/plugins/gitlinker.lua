@@ -1,6 +1,8 @@
 MiniDeps.later(function()
-    MiniDeps.add("nvim-lua/plenary.nvim")
-    MiniDeps.add("ruifm/gitlinker.nvim")
+    MiniDeps.add({
+        source = "ruifm/gitlinker.nvim",
+        depends = { "nvim-lua/plenary.nvim" },
+    })
     require("gitlinker").setup({
         callbacks = {
             ["git.aflabs.org"] = require("gitlinker.hosts").get_gitlab_type_url,
