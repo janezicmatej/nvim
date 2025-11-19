@@ -1,5 +1,6 @@
 return {
   ["copilot.vim"] = "da369d90cfd6c396b1d0ec259836a1c7222fb2ea",
+  ["fidget.nvim"] = "e32b672d8fd343f9d6a76944fedb8c61d7d8111a",
   ["fzf-lua"] = "123cc546c4618f5fd90d5db2da5643e76979162c",
   ["gitlinker.nvim"] = "cc59f732f3d043b626c8702cb725c82e54d35c25",
   ["gitsigns.nvim"] = "cdafc320f03f2572c40ab93a4eecb733d4016d07",
