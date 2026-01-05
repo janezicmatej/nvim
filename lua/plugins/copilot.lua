@@ -16,7 +16,6 @@ now_if_args(function()
         nix = true,
         python = true,
         rust = true,
-        sh = true,
         typescript = true,
     }
 
